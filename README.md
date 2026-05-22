@@ -2,6 +2,12 @@
 
 Avaliação prática de Engenharia de Software para a plataforma B2B2C "Simulador ENEM".
 
+## Integrantes
+
+Adrian Riegel;
+Eduardo Selzer;
+Vicenzo Luiggi Mori.
+
 ## Diagrama Entidade-Relacionamento (DER)
 
 ```mermaid
