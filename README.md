@@ -16,54 +16,53 @@ erDiagram
 
     auth_users {
         uuid id PK
-        varchar email
-        varchar password_hash
+        varchar email "UNIQUE NOT NULL"
+        varchar password_hash "NOT NULL"
+        timestamp created_at
     }
 
     profiles {
         uuid id PK
-        uuid auth_user_id FK "UNIQUE"
-        varchar full_name
-        varchar role "aluno, admin_escolar, admin_global"
+        uuid auth_user_id FK "UNIQUE NOT NULL"
+        varchar full_name "NOT NULL"
+        varchar role "NOT NULL DEFAULT 'aluno'"
     }
 
     schools {
         uuid id PK
-        varchar name
-        varchar cnpj "UNIQUE"
-        uuid admin_id FK "Must be admin_escolar"
+        varchar name "NOT NULL"
+        varchar cnpj "UNIQUE NOT NULL"
+        uuid admin_id FK "NOT NULL - Must be admin_escolar"
     }
 
     enrollments {
         uuid id PK
-        uuid student_id FK
-        uuid school_id FK
-        %% UNIQUE(student_id, school_id)
+        uuid student_id FK "NOT NULL (UK com school_id)"
+        uuid school_id FK "NOT NULL"
     }
 
     questions {
         uuid id PK
-        int internal_number
-        jsonb statement
-        jsonb alternatives
+        serial internal_number "UNIQUE NOT NULL"
+        jsonb statement "NOT NULL"
+        jsonb alternatives "NOT NULL"
     }
 
     simulation_sessions {
         uuid id PK
-        uuid student_id FK
-        timestamp started_at
+        uuid student_id FK "NOT NULL"
+        timestamp started_at "NOT NULL DEFAULT now()"
         timestamp finished_at
-        varchar status "in_progress, completed"
-        int total_questions
-        int total_correct
+        varchar status "NOT NULL DEFAULT 'in_progress'"
+        int total_questions "NOT NULL DEFAULT 0"
+        int total_correct "NOT NULL DEFAULT 0"
     }
 
     answers {
         uuid id PK
-        uuid session_id FK
-        uuid question_id FK
-        int chosen_alternative
-        boolean is_correct
-        timestamp answered_at
-        %% UNIQUE(session_id, question_id)
+        uuid session_id FK "NOT NULL (UK com question_id)"
+        uuid question_id FK "NOT NULL"
+        int chosen_alternative "NOT NULL"
+        boolean is_correct "NOT NULL"
+        timestamp answered_at "NOT NULL DEFAULT now()"
     }
