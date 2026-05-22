@@ -1,4 +1,4 @@
-# Plataforma-Simulador-ENEM---Atividade-avaliativa
+# Plataforma Simulador ENEM - Atividade avaliativa
 
 Avaliação prática de Engenharia de Software para a plataforma B2B2C "Simulador ENEM".
 
